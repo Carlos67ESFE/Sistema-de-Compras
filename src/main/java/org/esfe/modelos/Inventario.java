@@ -1,46 +1,40 @@
 package org.esfe.modelos;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Setter
 @Getter
 @Entity
-@Table(name = "proveedores")
-public class Proveedor {
+@Table(name = "Inventarios")
+public class Inventario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-    @JoinColumn (name = "marca_id")
-    private  Marca marca;
+    @JoinColumn (name = "producto_id")
+    private  Producto producto;
 
-    @NotBlank(message = "El nombre del proveedor es requerido")
-    private String nombreProveedor;
+    private  int stockActual;
 
-    private String telefono;
+    private  int stockMinimo;
 
-    private String email;
+    private  String almacenes;
 
-    private String direccion;
+    private  String ubicacionAlmacenes;
 
-    private String redes;
+    private  String estado;
 
     @Column(name = "fecha_registro", nullable = false, updatable = false)
     private LocalDateTime fechaRegistro;
 
     @Column(name = "fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
-
-    @OneToMany (mappedBy = "proveedor")
-    private List<Movimiento> movimientos;
 
     // Método que se ejecuta antes de persistir la entidad
     @PrePersist
@@ -61,4 +55,5 @@ public class Proveedor {
     public void setId(Integer id) {
         this.id = id;
     }
+
 }

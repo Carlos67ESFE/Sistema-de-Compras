@@ -1,8 +1,5 @@
 package org.esfe.services.interfaces;
 
-import org.esfe.dtos.categoria.CategoriaGuardar;
-import org.esfe.dtos.categoria.CategoriaModificar;
-import org.esfe.dtos.categoria.CategoriaSalida;
 import org.esfe.dtos.proveedor.ProveedorGuardar;
 import org.esfe.dtos.proveedor.ProveedorModificar;
 import org.esfe.dtos.proveedor.ProveedorSalida;

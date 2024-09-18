@@ -56,8 +56,10 @@ public class ProveedorService implements IProveedorService {
 
     @Override
     public ProveedorSalida crear(ProveedorGuardar proveedorGuardar) {
-        Proveedor proveedor = proveedorRepository.save(modelMapper.map(proveedorGuardar, Proveedor.class));
-        return  modelMapper.map(proveedor, ProveedorSalida.class);
+        Proveedor proveedor = modelMapper.map(proveedorGuardar, Proveedor.class);
+        proveedor.setId(null);
+
+        return modelMapper.map(proveedorRepository.save(proveedor), ProveedorSalida.class);
     }
 
     @Override

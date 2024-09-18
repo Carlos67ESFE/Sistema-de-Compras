@@ -20,4 +20,5 @@ public class ProveedorGuardar implements Serializable {
     private String direccion;
 
     private String redes;
+
 }

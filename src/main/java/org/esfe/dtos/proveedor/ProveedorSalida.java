@@ -28,4 +28,5 @@ public class ProveedorSalida implements Serializable {
     private LocalDateTime fechaRegistro;
 
     private LocalDateTime fechaActualizacion;
+
 }

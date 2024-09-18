@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Setter
 @Getter
@@ -44,6 +45,12 @@ public class Producto {
 
     @Column(name = "fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
+
+    @OneToMany (mappedBy = "producto")
+    private List<Movimiento> movimientos;
+
+    @OneToMany (mappedBy = "producto")
+    private List<Inventario> inventarios;
 
     // Método que se ejecuta antes de persistir la entidad
     @PrePersist
