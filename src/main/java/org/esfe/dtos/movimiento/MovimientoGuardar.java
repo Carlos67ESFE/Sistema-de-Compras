@@ -16,7 +16,7 @@ public class MovimientoGuardar implements Serializable {
 
     private Integer productoId;
 
-    private Integer proveedorId;
+    private Integer proveedor_Id;
 
     private LocalDate fechaMovimiento;
 

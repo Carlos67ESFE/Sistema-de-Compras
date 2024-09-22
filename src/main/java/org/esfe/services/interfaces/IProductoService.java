@@ -3,6 +3,8 @@ package org.esfe.services.interfaces;
 import org.esfe.dtos.Producto.ProductoGuardar;
 import org.esfe.dtos.Producto.ProductoModificar;
 import org.esfe.dtos.Producto.ProductoSalida;
+import org.esfe.dtos.inventario.InventarioSalida;
+import org.esfe.dtos.proveedor.ProveedorSalida;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,11 +20,11 @@ public interface IProductoService {
 
     Page<ProductoSalida> obtenerTodosPaginados(Pageable pageable);
 
-    Optional<ProductoSalida> obtenerPorId(Integer id);
+    ProductoSalida obtenerPorId(Integer id);
 
-    ProductoSalida crear(ProductoGuardar productoGuardar, MultipartFile archivo) throws IOException;
+    ProductoSalida crear(ProductoGuardar productoGuardar);
 
-    ProductoSalida editar(ProductoModificar productoModificar, MultipartFile archivo) throws IOException;
+    ProductoSalida editar(ProductoModificar productoModificar);
 
     void eliminarPorId(Integer id);
 

@@ -1,5 +1,6 @@
 package org.esfe.Controladores;
 
+import org.esfe.dtos.inventario.InventarioCambiarEstado;
 import org.esfe.dtos.inventario.InventarioGuardar;
 import org.esfe.dtos.inventario.InventarioModificar;
 import org.esfe.dtos.inventario.InventarioSalida;
@@ -52,6 +53,16 @@ public class InventarioController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/producto/{id}")
+    public ResponseEntity<List<InventarioSalida>> mostrarPorProducto(@PathVariable Integer id){
+        List<InventarioSalida> inventarios = iInventarioService.obtenerPorProductoId(id);
+
+        if(!inventarios.isEmpty()){
+            return ResponseEntity.ok(inventarios);
+        }
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping
     public ResponseEntity<InventarioSalida> crear(@RequestBody InventarioGuardar inventarioGuardar){
         InventarioSalida inventarios = iInventarioService.crear(inventarioGuardar);
@@ -71,6 +82,16 @@ public class InventarioController {
             return ResponseEntity.ok(inventarios);
         }
 
+        return ResponseEntity.internalServerError().build();
+    }
+
+    @PatchMapping
+    public ResponseEntity<InventarioSalida> cambiarEstado(@RequestBody InventarioCambiarEstado inventarioCambiarEstado){
+        InventarioSalida inventarios = iInventarioService.cambiarEstado(inventarioCambiarEstado);
+
+        if(inventarios != null){
+            return ResponseEntity.ok(inventarios);
+        }
         return ResponseEntity.internalServerError().build();
     }
 

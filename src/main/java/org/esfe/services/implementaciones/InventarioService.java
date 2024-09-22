@@ -1,5 +1,6 @@
 package org.esfe.services.implementaciones;
 
+import org.esfe.dtos.inventario.InventarioCambiarEstado;
 import org.esfe.dtos.inventario.InventarioGuardar;
 import org.esfe.dtos.inventario.InventarioModificar;
 import org.esfe.dtos.inventario.InventarioSalida;
@@ -31,7 +32,7 @@ public class InventarioService implements IInventarioService {
     public List<InventarioSalida> obtenerTodos() {
         List<Inventario> inventarios = iInventarioRepository.findAll();
         return inventarios.stream()
-                .map(inventario -> modelMapper.map(inventarios, InventarioSalida.class))
+                .map(inventario -> modelMapper.map(inventario, InventarioSalida.class))
                 .collect(Collectors.toList());
     }
 
@@ -56,9 +57,20 @@ public class InventarioService implements IInventarioService {
     }
 
     @Override
+    public List<InventarioSalida> obtenerPorProductoId(Integer idProducto) {
+        List<Inventario> inventarios = iInventarioRepository.findByProductoId(idProducto);
+
+        return inventarios.stream()
+                .map(inventario -> modelMapper.map(inventario, InventarioSalida.class))
+                .collect(Collectors.toList());
+    }
+
+
+    @Override
     public InventarioSalida crear(InventarioGuardar inventarioGuardar) {
         Inventario inventario = modelMapper.map(inventarioGuardar, Inventario.class);
-        inventario.setId(null);
+        inventario.setIdInventario(null);
+        inventario.setEstado(Inventario.Status.APROBADA);
 
         return modelMapper.map(iInventarioRepository.save(inventario), InventarioSalida.class);
     }
@@ -67,6 +79,14 @@ public class InventarioService implements IInventarioService {
     public InventarioSalida editar(InventarioModificar inventarioModificar) {
         Inventario inventario = iInventarioRepository.save(modelMapper.map(inventarioModificar, Inventario.class));
         return  modelMapper.map(inventario, InventarioSalida.class);
+    }
+
+    @Override
+    public InventarioSalida cambiarEstado(InventarioCambiarEstado inventarioCambiarEstado) {
+        Inventario inventario = iInventarioRepository.findById(inventarioCambiarEstado.getIdInventario()).get();
+        inventario.setEstado(Inventario.Status.valueOf(inventarioCambiarEstado.getEstado()));
+
+        return modelMapper.map(iInventarioRepository.save(inventario), InventarioSalida.class);
     }
 
     @Override

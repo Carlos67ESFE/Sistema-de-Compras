@@ -10,13 +10,15 @@ import java.time.LocalDate;
 @Setter
 public class MovimientoModificar implements Serializable {
 
+    private Integer Id;
+
     private String tipo;
 
     private int cantidad;
 
     private Integer productoId;
 
-    private Integer proveedorId;
+    private Integer proveedor_Id;
 
     private LocalDate fechaMovimiento;
 

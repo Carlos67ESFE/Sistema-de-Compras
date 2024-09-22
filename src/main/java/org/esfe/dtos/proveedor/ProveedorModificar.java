@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Setter
 public class ProveedorModificar implements Serializable {
 
-    private Integer id;
+    private Integer IdProveedor;
 
     private Integer marcaId;
 

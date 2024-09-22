@@ -9,6 +9,8 @@ import java.io.Serializable;
 @Setter
 public class InventarioModificar implements Serializable {
 
+    private Integer idInventario;
+
     private Integer productoId;
 
     private  int stockActual;

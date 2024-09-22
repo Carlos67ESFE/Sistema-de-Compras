@@ -1,9 +1,10 @@
 package org.esfe.services.implementaciones;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.esfe.dtos.Producto.ProductoGuardar;
 import org.esfe.dtos.Producto.ProductoModificar;
 import org.esfe.dtos.Producto.ProductoSalida;
+import org.esfe.dtos.inventario.InventarioSalida;
+import org.esfe.modelos.Inventario;
 import org.esfe.modelos.Producto;
 import org.esfe.repositorio.IProductoRepository;
 import org.esfe.services.interfaces.IProductoService;
@@ -13,12 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -52,48 +48,27 @@ public class ProductoService implements IProductoService {
     }
 
     @Override
-    public Optional<ProductoSalida> obtenerPorId(Integer id) {
+    public ProductoSalida obtenerPorId(Integer id) {
         Optional<Producto> producto = productoRepository.findById(id);
 
         if (producto.isPresent()) {
-            ProductoSalida productoSalida = modelMapper.map(producto.get(), ProductoSalida.class);
-            return Optional.of(productoSalida);
+            return modelMapper.map(producto.get(), ProductoSalida.class);
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override
-    public ProductoSalida crear(ProductoGuardar productoGuardar, MultipartFile archivo) throws IOException {
+    public ProductoSalida crear(ProductoGuardar productoGuardar) {
         Producto producto = modelMapper.map(productoGuardar, Producto.class);
+        producto.setId(null);
 
-        if (archivo != null && !archivo.isEmpty()) {
-            producto.setImagen(archivo.getBytes());
-        }
-
-        // Guarda el producto en la base de datos
-        producto = productoRepository.save(producto);
-
-        // Mapea el producto guardado a ProductoSalida y lo retorna
-        return modelMapper.map(producto, ProductoSalida.class);
+        return modelMapper.map(productoRepository.save(producto), ProductoSalida.class);
     }
 
     @Override
-    public ProductoSalida editar(ProductoModificar productoModificar, MultipartFile imagen) {
-        Producto producto = productoRepository.findById(productoModificar.getId())
-                .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado"));
-
-        modelMapper.map(productoModificar, producto);
-
-        if (imagen != null && !imagen.isEmpty()) {
-            try {
-                producto.setImagen(imagen.getBytes());
-            } catch (IOException e) {
-                throw new RuntimeException("Error al procesar la imagen", e);
-            }
-        }
-
-        producto = productoRepository.save(producto);
-        return modelMapper.map(producto, ProductoSalida.class);
+    public ProductoSalida editar(ProductoModificar productoModificar) {
+        Producto producto = productoRepository.save(modelMapper.map(productoModificar, Producto.class));
+        return  modelMapper.map(producto, ProductoSalida.class);
     }
 
     @Override

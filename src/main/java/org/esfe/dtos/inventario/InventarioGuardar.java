@@ -19,5 +19,4 @@ public class InventarioGuardar implements Serializable {
 
     private  String ubicacionAlmacenes;
 
-    private  String estado;
 }

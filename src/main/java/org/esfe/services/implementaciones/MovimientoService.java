@@ -31,7 +31,7 @@ public class MovimientoService implements ImovimientoService {
     public List<MovimientoSalida> obtenerTodos() {
         List<Movimiento> movimientos = iMovimientoRepository.findAll();
         return movimientos.stream()
-                .map(movimiento -> modelMapper.map(movimientos, MovimientoSalida.class))
+                .map(movimiento -> modelMapper.map(movimiento, MovimientoSalida.class))
                 .collect(Collectors.toList());
     }
 

@@ -11,5 +11,5 @@ public class CategoriaModificar implements Serializable {
 
     private Integer id;
 
-    private String nombre;
+    private String nombreCategoria;
 }

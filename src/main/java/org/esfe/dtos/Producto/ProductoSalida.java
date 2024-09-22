@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 public class ProductoSalida implements Serializable {
 
-    private Integer id;
+    private Integer idProducto;
 
     private String nombre;
 
@@ -26,17 +26,10 @@ public class ProductoSalida implements Serializable {
 
     private CategoriaSalida categoria;
 
-    private byte[] imagen; // Cambiado de 'byte' a 'byte[]'
+    private String imagen;
 
     private LocalDateTime fechaRegistro;
 
     private LocalDateTime fechaActualizacion;
 
-    public byte[] getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
-    }
 }

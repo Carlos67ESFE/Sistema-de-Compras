@@ -1,5 +1,6 @@
 package org.esfe.services.interfaces;
 
+import org.esfe.dtos.inventario.InventarioCambiarEstado;
 import org.esfe.dtos.inventario.InventarioGuardar;
 import org.esfe.dtos.inventario.InventarioModificar;
 import org.esfe.dtos.inventario.InventarioSalida;
@@ -16,9 +17,13 @@ public interface IInventarioService {
 
     InventarioSalida obtenerPorId(Integer id);
 
+    List<InventarioSalida> obtenerPorProductoId(Integer id);
+
     InventarioSalida crear(InventarioGuardar inventarioGuardar);
 
     InventarioSalida editar(InventarioModificar inventarioModificar);
+
+    InventarioSalida cambiarEstado(InventarioCambiarEstado inventarioCambiarEstado);
 
     void eliminarPorId(Integer id);
 }

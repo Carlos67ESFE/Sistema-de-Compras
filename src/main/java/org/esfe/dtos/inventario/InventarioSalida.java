@@ -2,6 +2,7 @@ package org.esfe.dtos.inventario;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.esfe.dtos.Producto.ProductoSalida;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -10,9 +11,9 @@ import java.time.LocalDateTime;
 @Setter
 public class InventarioSalida implements Serializable {
 
-    private Integer id;
+    private Integer idInventario;
 
-    private Integer productoId;
+    private ProductoSalida producto;
 
     private  int stockActual;
 
@@ -27,4 +28,5 @@ public class InventarioSalida implements Serializable {
     private LocalDateTime fechaRegistro;
 
     private LocalDateTime fechaActualizacion;
+
 }

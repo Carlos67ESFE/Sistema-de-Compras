@@ -18,11 +18,10 @@ public class Categoria {
     private Integer id;
 
     @NotBlank(message = "El nombre es requerido")
-    private String nombre;
+    private String nombreCategoria;
 
     @OneToMany (mappedBy = "categoria")
     private List<Producto> productos;
 
-    
 
 }

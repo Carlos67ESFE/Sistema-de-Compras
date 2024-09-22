@@ -9,6 +9,8 @@ import java.io.Serializable;
 @Setter
 public class MarcaModificar implements Serializable {
 
+    private Integer id;
+
     private String nombre;
 
     private String nombreEmpresa;

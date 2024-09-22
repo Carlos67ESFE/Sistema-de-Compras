@@ -1,5 +1,6 @@
 package org.esfe.modelos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,12 +10,12 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Entity
-@Table(name = "Movimientos")
+@Table(name = "movimientos")
 public class Movimiento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer Id;
 
     private String tipo;
 
@@ -35,11 +36,10 @@ public class Movimiento {
     private  String personalResponsable;
 
     public Integer getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        Id = id;
     }
-
 }

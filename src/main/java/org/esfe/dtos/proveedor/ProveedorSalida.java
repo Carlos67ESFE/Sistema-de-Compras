@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 public class ProveedorSalida implements Serializable {
 
-    private Integer id;
+    private Integer IdProveedor;
 
     private MarcaSalida marca;
 

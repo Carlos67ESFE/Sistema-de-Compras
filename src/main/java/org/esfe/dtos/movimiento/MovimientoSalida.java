@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Setter
 public class MovimientoSalida implements Serializable {
 
-    private Integer id;
+    private Integer Id;
 
     private String tipo;
 

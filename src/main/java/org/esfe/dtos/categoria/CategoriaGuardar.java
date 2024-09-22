@@ -8,5 +8,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class CategoriaGuardar implements Serializable {
-    private String nombre;
+
+    private String nombreCategoria;
 }

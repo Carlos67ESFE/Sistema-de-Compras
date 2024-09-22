@@ -29,16 +29,15 @@ public class Producto {
     private int Stock;
 
     @ManyToOne
-    @JoinColumn (name = "marca_id")
-    private  Marca marca;
+    @JoinColumn(name = "marca_id")
+    private Marca marca;
 
     @ManyToOne
-    @JoinColumn (name = "categoria_id")
-    private  Categoria categoria;
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
 
-    @Lob
-    @Column(columnDefinition = "MEDIUMBLOB")
-    private byte[] imagen;
+    @Column(name = "imagen")
+    private String imagen;
 
     @Column(name = "fecha_registro", nullable = false, updatable = false)
     private LocalDateTime fechaRegistro;
@@ -64,11 +63,11 @@ public class Producto {
         this.fechaActualizacion = LocalDateTime.now(); // Actualiza la fecha de modificación
     }
 
-    public byte[] getImagen() {
-        return imagen;
+    public Integer getId() {
+        return id;
     }
 
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
+    public void setId(Integer idproducto) {
+        this.id = idproducto;
     }
 }

@@ -1,5 +1,6 @@
 package org.esfe.modelos;
 
+import ch.qos.logback.core.status.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,12 +10,12 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @Entity
-@Table(name = "Inventarios")
+@Table(name = "inventarios")
 public class Inventario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idInventario;
 
     @ManyToOne
     @JoinColumn (name = "producto_id")
@@ -28,7 +29,8 @@ public class Inventario {
 
     private  String ubicacionAlmacenes;
 
-    private  String estado;
+    @Enumerated(EnumType.STRING)
+    private Status estado;
 
     @Column(name = "fecha_registro", nullable = false, updatable = false)
     private LocalDateTime fechaRegistro;
@@ -48,12 +50,24 @@ public class Inventario {
         this.fechaActualizacion = LocalDateTime.now(); // Actualiza la fecha de modificación
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdInventario() {
+        return idInventario;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdInventario(Integer idInventario) {
+        this.idInventario = idInventario;
+    }
+
+    public Status getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Status estado) {
+        this.estado = estado;
+    }
+
+    public static enum Status{
+        APROBADA, PROCESO, REVISIÓN, FINALIZADA
     }
 
 }

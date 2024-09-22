@@ -16,7 +16,7 @@ public class Proveedor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer IdProveedor;
 
     @ManyToOne
     @JoinColumn (name = "marca_id")
@@ -54,11 +54,11 @@ public class Proveedor {
         this.fechaActualizacion = LocalDateTime.now(); // Actualiza la fecha de modificación
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdProveedor() {
+        return IdProveedor;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdProveedor(Integer idProveedor) {
+        IdProveedor = idProveedor;
     }
 }
