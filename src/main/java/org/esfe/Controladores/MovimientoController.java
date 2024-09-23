@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class MovimientoController {
     @Autowired
     private ImovimientoService imovimientoService;
 
+    @PreAuthorize("hasRole('Administrador')")
     @GetMapping
     public ResponseEntity<Page<MovimientoSalida>> mostrarTodosPaginados(Pageable pageable){
         Page<MovimientoSalida> movimientos = imovimientoService.obtenerTodosPaginados(pageable);
@@ -33,6 +35,7 @@ public class MovimientoController {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('Administrador')")
     @GetMapping("/lista")
     public ResponseEntity<List<MovimientoSalida>> mostrarTodos(){
         List<MovimientoSalida> movimientos = imovimientoService.obtenerTodos();
@@ -43,6 +46,7 @@ public class MovimientoController {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('Administrador')")
     @GetMapping("/{id}")
     public ResponseEntity<MovimientoSalida> buscarPorId(@PathVariable Integer id){
         MovimientoSalida movimientos = imovimientoService.obtenerPorId(id);
@@ -54,6 +58,7 @@ public class MovimientoController {
         return ResponseEntity.notFound().build();
     }
 
+    @PreAuthorize("hasRole('Administrador')")
     @PostMapping
     public ResponseEntity<MovimientoSalida> crear(@RequestBody MovimientoGuardar movimientoGuardar){
         MovimientoSalida movimientos = imovimientoService.crear(movimientoGuardar);
@@ -65,6 +70,7 @@ public class MovimientoController {
         return ResponseEntity.internalServerError().build();
     }
 
+    @PreAuthorize("hasRole('Administrador')")
     @PutMapping("/{id}")
     public ResponseEntity<MovimientoSalida> editar(@PathVariable Integer id,@RequestBody MovimientoModificar movimientoModificar ){
         MovimientoSalida movimientos = imovimientoService.editar(movimientoModificar);
@@ -76,6 +82,7 @@ public class MovimientoController {
         return ResponseEntity.internalServerError().build();
     }
 
+    @PreAuthorize("hasRole('Administrador')")
     @DeleteMapping("/{id}")
     public ResponseEntity eliminar(@PathVariable Integer id){
         imovimientoService.eliminarPorId(id);

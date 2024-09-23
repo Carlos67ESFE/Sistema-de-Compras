@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class CategoriaController {
     @Autowired
     private ICategoriasService categoriasService;
 
+    @PreAuthorize("hasAnyRole('Administrador', 'Empleado')")
     @GetMapping
     public ResponseEntity<Page<CategoriaSalida>> mostrarTodosPaginados(Pageable pageable){
         Page<CategoriaSalida> categorias = categoriasService.obtenerTodosPaginados(pageable);
@@ -28,6 +30,7 @@ public class CategoriaController {
         return ResponseEntity.notFound().build();
     }
 
+    @PreAuthorize("hasAnyRole('Administrador', 'Empleado')")
     @GetMapping("/lista")
     public ResponseEntity<List<CategoriaSalida>> mostrarTodos(){
         List<CategoriaSalida> categorias = categoriasService.obtenerTodos();
@@ -38,6 +41,7 @@ public class CategoriaController {
         return ResponseEntity.notFound().build();
     }
 
+    @PreAuthorize("hasAnyRole('Administrador', 'Empleado')")
     @GetMapping("/{id}")
     public ResponseEntity<CategoriaSalida> buscarPorId(@PathVariable Integer id){
         CategoriaSalida categoria = categoriasService.obtenerPorId(id);
@@ -49,18 +53,21 @@ public class CategoriaController {
         return ResponseEntity.notFound().build();
     }
 
+    @PreAuthorize("hasAnyRole('Administrador', 'Empleado')")
     @PostMapping
     public ResponseEntity<CategoriaSalida> crear(@RequestBody CategoriaGuardar categoriaGuardar){
         CategoriaSalida categoria = categoriasService.crear(categoriaGuardar);
         return ResponseEntity.ok(categoria);
     }
 
+    @PreAuthorize("hasAnyRole('Administrador', 'Empleado')")
     @PutMapping("/{id}")
     public ResponseEntity<CategoriaSalida> editar(@PathVariable Integer id,@RequestBody CategoriaModificar categoriaModificar ){
         CategoriaSalida categoria = categoriasService.editar(categoriaModificar);
         return ResponseEntity.ok(categoria);
     }
 
+    @PreAuthorize("hasAnyRole('Administrador', 'Empleado')")
     @DeleteMapping("/{id}")
     public ResponseEntity eliminar(@PathVariable Integer id){
         categoriasService.eliminarPorId(id);
